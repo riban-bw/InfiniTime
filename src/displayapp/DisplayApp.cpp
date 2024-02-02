@@ -28,6 +28,7 @@
 #include "displayapp/screens/Steps.h"
 #include "displayapp/screens/PassKey.h"
 #include "displayapp/screens/Error.h"
+#include "displayapp/screens/Midi.h"
 
 #include "drivers/Cst816s.h"
 #include "drivers/St7789.h"
@@ -107,14 +108,16 @@ DisplayApp::DisplayApp(Drivers::St7789& lcd,
                  motionController,
                  alarmController,
                  brightnessController,
-                 nullptr,
+                 nullptr, //weatherController
+                 nullptr, //midiService
                  filesystem,
                  timer,
-                 nullptr,
+                 nullptr, //systemTask
                  this,
                  lvgl,
-                 nullptr,
-                 nullptr} {
+                 nullptr, //musicService
+                 nullptr //navigationService
+                 } {
 }
 
 void DisplayApp::Start(System::BootErrors error) {
@@ -617,6 +620,10 @@ void DisplayApp::Register(Pinetime::Controllers::SimpleWeatherService* weatherSe
 
 void DisplayApp::Register(Pinetime::Controllers::MusicService* musicService) {
   this->controllers.musicService = musicService;
+}
+
+void DisplayApp::Register(Pinetime::Controllers::MidiService* midiService) {
+  this->controllers.midiService = midiService;
 }
 
 void DisplayApp::Register(Pinetime::Controllers::NavigationService* NavigationService) {

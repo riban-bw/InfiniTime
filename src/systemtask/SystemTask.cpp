@@ -138,6 +138,7 @@ void SystemTask::Work() {
   displayApp.Register(this);
   displayApp.Register(&nimbleController.weather());
   displayApp.Register(&nimbleController.music());
+  displayApp.Register(&nimbleController.midi());
   displayApp.Register(&nimbleController.navigation());
   displayApp.Start(bootError);
 
